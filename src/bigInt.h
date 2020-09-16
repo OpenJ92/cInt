@@ -2,6 +2,8 @@
 //
 //
 //	- isinstance of Num. (+) etc...
+//	- do we need to keep track of INT 
+//	  structs to destroy?
 
 typedef struct INT
 {
@@ -11,13 +13,13 @@ typedef struct INT
 void int_init(void);
 void int_destroy(INT* a);
 
-INT* fromInteger(int element);
-INT* fromString(char** element, int base);
+INT* fromInteger(const int element);
+INT* fromString(const char* element, const int base);
 
-INT* add(INT* a, INT* b);
-INT* mul(INT* a, INT* b);
+INT* add(const INT* a, const INT* b);
+INT* mul(const INT* a, const INT* b);
 
-INT* abs(INT* a);
-INT* negate(INT* a);
+INT* abs(const INT* a);
+INT* negate(const INT* a);
 
-INT* signum(INT* a);
+INT* signum(const INT* a);
