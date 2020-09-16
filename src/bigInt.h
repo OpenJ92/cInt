@@ -2,24 +2,47 @@
 //
 //
 //	- isinstance of Num. (+) etc...
-//	- do we need to keep track of INT 
+//	- do we need to keep track of bigInt 
 //	  structs to destroy?
+//	- Do we need a sense of LT EQ GT? Maybe for div impl.
+//	- twos complement for implementation.
 
-typedef struct INT
+// last bit in the coef should be the size.
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct bigInt
 {
-	char* coef;
-} INT;
+	int size; // What is the measure? Block or Index?
+	int* coef; // 8 bytes
+                             //bits
+	// -- = block_num*(8*sizeof(int)) - 1
+	// pow order -- [(sign), n .. 0]
+	//                           sign bit
+	// | -- | -- | -- | -- | 
+	// | 00 | 1- | 
+}  bigInt;
 
-void int_init(void);
-void int_destroy(INT* a);
+// Num methods
 
-INT* fromInteger(const int element);
-INT* fromString(const char* element, const int base);
+void int_init(void); 
+void int_destroy(bigInt* a);
 
-INT* int_add(const INT* a, const INT* b);
-INT* int_mul(const INT* a, const INT* b);
+void int_resize(bigInt* a); // policy of doubling.
 
-INT* int_abs(const INT* a);
-INT* int_negate(const INT* a);
+const bigInt* fromInteger(const int element);
+const bigInt* fromString(const char* element, const int base);
 
-INT* int_signum(const INT* a);
+const bigInt* int_add(const bigInt* a, const bigInt* b);
+const bigInt* int_mul(const bigInt* a, const bigInt* b);
+const bigInt* int_sub(const bigInt* a, const bigInt* b);
+const bigInt* int_div(const bigInt* a, const bigInt* b);
+const bigInt* int_mod(const bigInt* a, const bigInt* b);
+
+const bigInt* int_abs(const bigInt* a);
+const bigInt* int_negate(const bigInt* a);
+
+const bigInt* int_signum(const bigInt* a);
+
+// Ord methods
+
