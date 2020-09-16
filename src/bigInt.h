@@ -16,10 +16,10 @@ void int_destroy(INT* a);
 INT* fromInteger(const int element);
 INT* fromString(const char* element, const int base);
 
-INT* add(const INT* a, const INT* b);
-INT* mul(const INT* a, const INT* b);
+INT* int_add(const INT* a, const INT* b);
+INT* int_mul(const INT* a, const INT* b);
 
-INT* abs(const INT* a);
-INT* negate(const INT* a);
+INT* int_abs(const INT* a);
+INT* int_negate(const INT* a);
 
-INT* signum(const INT* a);
+INT* int_signum(const INT* a);
