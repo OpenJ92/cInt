@@ -25,12 +25,12 @@ typedef struct bigInt
 
 // Num methods
 
-void int_init(void); 
+int int_init(bigInt* a); 
 void int_destroy(bigInt* a);
 
 void int_resize(bigInt* a); // policy of doubling.
 
-const bigInt* fromInteger(const int element);
+const bigInt* fromInteger(int element);
 const bigInt* fromString(const char* element, const int base);
 
 const bigInt* int_add(const bigInt* a, const bigInt* b);

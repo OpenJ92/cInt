@@ -1,25 +1,31 @@
 #include "bigInt.h"
 
-// Dynamic Allocation from return. Both coef and retval.
-const bigInt* fromInteger(const int element)
+int int_init(bigInt* element)
 {
-	bigInt* retval; int* coef;
+	if ((element->coef = (int*)malloc(sizeof(int))) == NULL)
+	{
+		return 0;
+	}
 
+	element->size = 8*sizeof(int);
+	return 1;
+}
+
+// Dynamic Allocation from return. Both coef and retval.
+const bigInt* fromInteger(int element)
+{
+	bigInt* retval; 
 	if ((retval = (bigInt*)malloc(sizeof(bigInt))) == NULL)
 	{
 		return NULL;
 	}
 
-	if ((coef = (int*)malloc(sizeof(int))) == NULL)
-	{
-		return NULL;
+	if (int_init(retval) == 0) 
+	{ 
+		return NULL; 
 	}
 
-	retval->size = 8*sizeof(int);
-
-	memset(coef, 0, sizeof(int));
-	*coef = element;
-	retval->coef = coef;
-
+	memset(retval->coef, 0, sizeof(int));
+	retval->coef = &element;
 	return retval;
 }
