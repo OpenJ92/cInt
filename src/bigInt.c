@@ -1,31 +1,48 @@
 #include "bigInt.h"
 
-int int_init(bigInt* element)
+void int_destroy(bigInt** element)
 {
-	if ((element->coef = (int*)malloc(sizeof(int))) == NULL)
-	{
-		return 0;
-	}
-
-	element->size = 8*sizeof(int);
-	return 1;
+	free(*element);
+	free((*element)->coef);
+	memset(*element, 0, sizeof(bigInt));
 }
 
-// Dynamic Allocation from return. Both coef and retval.
-const bigInt* fromInteger(int element)
+bigInt* int_init(void)
 {
-	bigInt* retval; 
+	bigInt* retval; int* coef;
 	if ((retval = (bigInt*)malloc(sizeof(bigInt))) == NULL)
 	{
 		return NULL;
 	}
 
-	if (int_init(retval) == 0) 
-	{ 
-		return NULL; 
+	if ((coef = (int*)malloc(sizeof(int))) == NULL)
+	{
+		free(retval);
+		return NULL;
 	}
 
-	memset(retval->coef, 0, sizeof(int));
-	retval->coef = &element;
+	retval->size = 8*sizeof(int);
+	retval->coef = coef; 
 	return retval;
 }
+
+// Dynamic Allocation from return. Both coef and retval.
+bigInt* fromInteger(int element)
+{
+	bigInt* retval;
+	if ((retval = int_init()) == NULL) 
+	{
+		return NULL;
+	}
+
+	*retval->coef = element;
+	return retval;
+}
+
+// bigInt* fromString(const char* element, const int base)
+// {
+// 	const char* tmp = element;
+// 	while (*tmp != '\0')
+// 	{
+// 	}
+// }

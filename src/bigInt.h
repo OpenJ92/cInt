@@ -25,24 +25,24 @@ typedef struct bigInt
 
 // Num methods
 
-int int_init(bigInt* a); 
-void int_destroy(bigInt* a);
+bigInt* int_init(void); 
+void int_destroy(bigInt** a);
 
 void int_resize(bigInt* a); // policy of doubling.
 
-const bigInt* fromInteger(int element);
-const bigInt* fromString(const char* element, const int base);
+bigInt* fromInteger(int element);
+bigInt* fromString(const char* element, const int base);
 
-const bigInt* int_add(const bigInt* a, const bigInt* b);
-const bigInt* int_mul(const bigInt* a, const bigInt* b);
-const bigInt* int_sub(const bigInt* a, const bigInt* b);
-const bigInt* int_div(const bigInt* a, const bigInt* b);
-const bigInt* int_mod(const bigInt* a, const bigInt* b);
+bigInt* int_add(const bigInt* a, const bigInt* b);
+bigInt* int_mul(const bigInt* a, const bigInt* b);
+bigInt* int_sub(const bigInt* a, const bigInt* b);
+bigInt* int_div(const bigInt* a, const bigInt* b);
+bigInt* int_mod(const bigInt* a, const bigInt* b);
 
-const bigInt* int_abs(const bigInt* a);
-const bigInt* int_negate(const bigInt* a);
+bigInt* int_abs(const bigInt* a);
+bigInt* int_negate(const bigInt* a);
 
-const bigInt* int_signum(const bigInt* a);
+bigInt* int_signum(const bigInt* a);
 
 // Ord methods
 

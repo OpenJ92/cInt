@@ -3,6 +3,7 @@
 int main()
 {
 	const int ex = 10;
-	const bigInt* val = fromInteger(ex);
+	bigInt* val = fromInteger(ex);
+	int_destroy(&val);
 	return 0;
 }
